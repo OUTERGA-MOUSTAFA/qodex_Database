@@ -1,5 +1,40 @@
 use qodex;
 
+
+#******************** Admin Privilages ************************
+/*
+grant insert, select, update, delete, execute, create, references
+on qodex
+to 'admin123';
+
+create role select_role;
+
+grant select on quiz, categories, questions, resultats
+to select_role;
+
+grant select_role
+to 'Ayoub El Faqir';
+
+#revoke select_role from 'Ayoub El Faqir'
+create user 'Ayoub Ouharda'	#login
+identified by 'ouherda123';		#password
+grant insert, select
+on utilisateurs, quiz, categories, questions, resultats
+to 'Ayoub Ouharda';
+
+create user 'Ayoub El Faqir'	#login
+identified by 'Faqir123';		#password
+grant delete, select
+on utilisateurs, quiz, categories, questions, resultats
+to 'Ayoub El Faqir';
+
+create user 'Maroua Kourdi'	#login
+identified by 'Kourdi123';		#password
+grant create, select, references
+on utilisateurs, quiz, categories, questions, resultats
+to 'Maroua Kourdi';
+
+*/
 #Requête 1 : Ajouter un nouveau quiz créé par un enseignant
 /*
 insert into quiz  (titre_quiz,descriptionquiz,id_categorie,id_enseignant,duree_minutes)values (
@@ -161,6 +196,7 @@ select q.titre_quiz,
 alter table Quiz
 add column date_creation datetime
 */
+
 #DESCRIBE utilisateurs;
 #invesible modepass users
 /*
@@ -178,38 +214,4 @@ SET motdepasse = AES_ENCRYPT(motdepasse, @key_str);
 #decrypted password
 CAST(AES_DECRYPT(motdepasse, @key_str) AS CHAR)
 */
-/*
-create user 'Ayoub Ouharda'	#login
-identified by 'ouherda123';		#password
-grant insert, select
-on utilisateurs, quiz, categories, questions, resultats
-to 'Ayoub Ouharda';
 
-create user 'Ayoub El Faqir'	#login
-identified by 'Faqir123';		#password
-grant delete, select
-on utilisateurs, quiz, categories, questions, resultats
-to 'Ayoub El Faqir';
-
-create user 'Maroua Kourdi'	#login
-identified by 'Kourdi123';		#password
-grant create, select, references
-on utilisateurs, quiz, categories, questions, resultats
-to 'Maroua Kourdi';
-
-*/
-#******************** Admin Privilages ************************
-/*
-grant insert, select, update, delete, execute, create, references
-on qodex
-to 'admin123';
-
-create role select_role;
-
-grant select on quiz, categories, questions, resultats
-to select_role;
-
-grant select_role
-to 'Ayoub El Faqir';
-*/
-#revoke select_role from 'Ayoub El Faqir'
